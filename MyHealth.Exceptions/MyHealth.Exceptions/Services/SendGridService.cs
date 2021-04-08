@@ -23,7 +23,6 @@ namespace MyHealth.Exceptions.Services
         {
             var exceptionMessageContent = $"An Exception has been thrown in: {exception.Source}\n" +
                     $"Exception thrown is: {exception.Message}\n" +
-                    $"InnerException: {exception.InnerException}" +
                     $"Stack Trace: {exception.StackTrace}";
 
             var exceptionEmailMessage = new SendGridMessage
