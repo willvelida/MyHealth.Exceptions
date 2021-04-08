@@ -5,8 +5,6 @@ using MyHealth.Exceptions.Functions;
 using MyHealth.Exceptions.Services;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 

@@ -15,10 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ServiceTests\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\MyHealth.Exceptions\MyHealth.Exceptions.csproj" />
   </ItemGroup>
 
