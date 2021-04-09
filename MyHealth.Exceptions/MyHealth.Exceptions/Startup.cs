@@ -2,7 +2,6 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MyHealth.Exceptions;
-using MyHealth.Exceptions.Helpers;
 using MyHealth.Exceptions.Services;
 using SendGrid;
 using System.IO;
@@ -20,14 +19,10 @@ namespace MyHealth.Exceptions
                 .AddEnvironmentVariables()
                 .Build();
 
-            builder.Services.AddOptions<FunctionOptions>()
-                .Configure<IConfiguration>((settings, configuration) =>
-                {
-                    configuration.GetSection("FunctionOptions").Bind(settings);
-                });
+            builder.Services.AddSingleton<IConfiguration>(config);
             builder.Services.AddLogging();
 
-            builder.Services.AddSingleton((s) => new SendGridClient(config["FunctionOptions:SendGridAPIKey"]));
+            builder.Services.AddSingleton((s) => new SendGridClient(config["SendGridAPIKey"]));
             builder.Services.AddScoped<ISendGridService, SendGridService>();
         }
     }
