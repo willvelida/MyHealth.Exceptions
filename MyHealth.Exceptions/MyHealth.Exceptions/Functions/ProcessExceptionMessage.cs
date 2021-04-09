@@ -21,7 +21,7 @@ namespace MyHealth.Exceptions.Functions
         }
 
         [FunctionName(nameof(ProcessExceptionMessage))]
-        public async Task Run([ServiceBusTrigger("myhealthexceptiontopic", "myhealthexceptionsubscription", Connection = "ServiceBusConnectionString")] string incomingExceptionMessage)
+        public async Task Run([ServiceBusTrigger("myhealthexceptiontopic", "myhealthexceptionsubscription", Connection = "FunctionOptions:ServiceBusConnectionString")] string incomingExceptionMessage)
         {
             try
             {

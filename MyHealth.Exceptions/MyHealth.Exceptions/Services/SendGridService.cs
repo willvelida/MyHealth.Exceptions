@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
+using MyHealth.Exceptions.Helpers;
 using SendGrid;
 using SendGrid.Helpers.Mail;
 using System;
@@ -9,14 +11,14 @@ namespace MyHealth.Exceptions.Services
     public class SendGridService : ISendGridService
     {
         private readonly SendGridClient _sendGridClient;
-        private readonly IConfiguration _configuration;
+        private readonly FunctionOptions _settings;
 
         public SendGridService(
             SendGridClient sendGridClient,
-            IConfiguration configuration)
+            IOptions<FunctionOptions> options)
         {
             _sendGridClient = sendGridClient;
-            _configuration = configuration;
+            _settings = options.Value;
         }
 
         public async Task SendExceptionEmail(Exception exception)
@@ -27,12 +29,12 @@ namespace MyHealth.Exceptions.Services
 
             var exceptionEmailMessage = new SendGridMessage
             {
-                From = new EmailAddress(_configuration["ExceptionRecipientEmail"], _configuration["ExceptionRecipientName"]),
+                From = new EmailAddress(_settings.ExceptionRecipientEmail, _settings.ExceptionRecipientName),
                 Subject = "MyHealth: Exception thrown",
                 PlainTextContent = exceptionMessageContent,
                 HtmlContent = exceptionMessageContent
             };
-            exceptionEmailMessage.AddTo(_configuration["ExceptionRecipientEmail"]);
+            exceptionEmailMessage.AddTo(_settings.ExceptionRecipientEmail);
 
             await _sendGridClient.SendEmailAsync(exceptionEmailMessage);
         }

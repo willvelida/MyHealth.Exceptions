@@ -14,7 +14,6 @@ namespace MyHealth.Exceptions.UnitTests.FunctionTests
     {
         private readonly Mock<ILogger<ProcessExceptionMessage>> _loggerMock;
         private readonly Mock<ISendGridService> _sendGridServiceMock;
-        private readonly Mock<IConfiguration> _configurationMock;
 
         private ProcessExceptionMessage _func;
 
@@ -22,9 +21,6 @@ namespace MyHealth.Exceptions.UnitTests.FunctionTests
         {
             _loggerMock = new Mock<ILogger<ProcessExceptionMessage>>();
             _sendGridServiceMock = new Mock<ISendGridService>();
-            _configurationMock = new Mock<IConfiguration>();
-            _configurationMock.Setup(x => x["ExceptionRecipientEmail"]).Returns("TestEmail");
-            _configurationMock.Setup(x => x["ExceptionRecipientName"]).Returns("TestName");
 
             _func = new ProcessExceptionMessage(_loggerMock.Object, _sendGridServiceMock.Object);
         }
