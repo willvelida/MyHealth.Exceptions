@@ -77,6 +77,6 @@ stages:
                     appType: functionApp
                     WebAppName: $(functionAppName)                   
                     package: '$(Pipeline.Workspace)/drop/MyHealth.Exceptions.zip'
-                    appSettings: '-FUNCTIONS_WORKER_RUNTIME "dotnet" -FUNCTIONS_EXTENSION_VERSION "~3" -ExceptionRecipientEmail "willvelida@hotmail.co.uk" -ExceptionRecipientName "Will Velida" -SendGridAPIKey "@Microsoft.KeyVault(SecretUri=https://willvelidakeyvault.vault.azure.net/secrets/sendgridapikey/d5d54864df0e415db8d7168d2cc8b3e6)" -ServiceBusConnectionString "@Microsoft.KeyVault(SecretUri=https://willvelidakeyvault.vault.azure.net/secrets/servicebusstorageconnectionstring/65723514479d44d5a3846dce260b98bb)" -APPINSIGHTS_INSTRUMENTATIONKEY "2fc597df-fc6b-4b20-ac9c-ee7240b70704"'
+                    appSettings: '-FUNCTIONS_WORKER_RUNTIME "dotnet" -FUNCTIONS_EXTENSION_VERSION "~3" -FunctionsOptions:ExceptionRecipientEmail "willvelida@hotmail.co.uk" -FunctionsOptions:ExceptionRecipientName "Will Velida" -FunctionsOptions:SendGridAPIKey "@Microsoft.KeyVault(SecretUri=https://willvelidakeyvault.vault.azure.net/secrets/sendgridapikey/d5d54864df0e415db8d7168d2cc8b3e6)" -FunctionsOptions:ServiceBusConnectionString "@Microsoft.KeyVault(SecretUri=https://willvelidakeyvault.vault.azure.net/secrets/servicebusstorageconnectionstring/65723514479d44d5a3846dce260b98bb)" -APPINSIGHTS_INSTRUMENTATIONKEY "2fc597df-fc6b-4b20-ac9c-ee7240b70704"'
                     enableCustomDeployment: true
                     RemoveAdditionalFilesFlag: true
